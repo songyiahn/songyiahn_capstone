@@ -3,7 +3,6 @@ title: "#WhatIEatinaDay Social Media Content and Orthorexic Tendency"
 author: >
   Songyi Ahn
   <br><small style="color:black;">School of Journalism and Communication, University of Oregon</small>
-date: "2026-03-??"
 output: 
   html_document:
       theme: paper
@@ -24,21 +23,188 @@ knitr::opts_chunk$set(echo = FALSE,
 library(rio)
 library(here)
 library(tidyverse)
+library(shiny)
+library(DT)
 ```
 
 ## Background
 
-what i eat in a day, orthorexia background 
+Short-form social media content such as "What I Eat in a Day" (WIEIAD) videos, often portraying restrictive and aesthetic eating habits for self-improvement, has become a dominant format among young audiences (Drivas et al., 2024; Pfender et al., 2023). However, the psychological impacts of these videos remain under-explored. Prior research suggests that exposure to appearance-focused media can heighten diverse body image concerns (e.g., thin-ideal internalization, social comparison, body dissatisfaction, self-esteem) and even contribute to problematic exercising and eating behaviors (Del Pozo et al., 2024; Minadeo & Pope, 2022). Among these, while other disordered eating such as anorexia and bulimia have received great amount of attention, a less-recognized but increasingly prevalant condition is orthorexia, which is characterized by an extreme obsessive focus on "healthy" eating (Koven & Abry, 2015; Kummer et al., 2008). Orthorexic tendencies often are hidden under health and 'ideal' weight management, but could result in serious mental and physical health outcomes (Messer et al., 2023). This project aims to raise public awareness of these subtle yet critical impacts of diet-focused social media content. Despite these effects, information explaining the mechanisms linking social media content to body image concerns is often inaccessible and hard to interpret for the general public. By providing an intuitive, visual, and interactive interface, complex associations between WIEIAD social media content exposure and body image status can be communicated more effectively to non-experts. These target audience of general public may benefit most from understanding how recent social media trend shapes their perceptions of body, food, and health. 
 
 ### Project Objectives
 
-1. examine 
-2. identify 
+1. Examine how different types of WIEIAD/vlog messages influence orthorexic tendencies among young women.
+2. Explore the relationship between body image-related factors and orthorexic tendencies among young women.
+3. Identify the psychological, behavioral, and social predictors strongly associated with orthorexic tendencies. 
+4. Analyze the themes of open-ended reflections from viewers of non-restrictive weight-inclusive WIEIAD content.
 
 ### About Data 
 
-the data is based on something something 
+This dataset was collected from an online experiment involving 472 young women (ages 19-25, M = 23.1, SD = 1.7). Participants came from diverse racial and ethnic backgrounds and most reported prior exposure to WIEIAD social media content. A small proportion indicated previous eating disorder treatment experience. 
 
+Participants randomly watched one of four vlogs: 1) non-food related vlogs, 2) weight-normative diet WIEIAD videos, 3) weight-inclusive non-diet WIEIAD videos, or 4) weight-inclusive non-diet WIEIAD videos with prompts to consider positive impact of conventionally regarded as 'unhealthy' food in their own words. Then orthorexic tendencies and body-image-lated factors were measured.
+
+Table below shows the data used for this project.
+
+```{r echo=FALSE}
+data <- import(here("data/wieiad_cleaned.csv"))
+```
+
+```{r}
+data_info <- data %>%
+  select(current_mood, group, ON, SAC, TII, BD, selfesteem, exce_exercise, mother, vlogexperience, help_received, recent_help, race_ethnicity, Age)
+
+#ui for data 
+
+ui_data <- fluidPage(
+  fluidRow(
+    column(4,
+      checkboxGroupInput(inputId = 'vlog_type',
+                         label = 'Vlog Type:',
+                         choices = unique(data_info$group),
+                         selected = unique(data_info$group))
+      ),
+    column(4,
+      checkboxGroupInput(inputId = 'help_received',
+                         label = 'ED Treatment Experience:',
+                         choices = unique(data_info$help_received),
+                         selected = unique(data_info$help_received))
+      ),
+    column(4,
+      checkboxGroupInput(inputId = 'race_ethnicity',
+                         label = 'Race/Ethnicity:',
+                         choices = unique(data_info$race_ethnicity),
+                         selected = unique(data_info$race_ethnicity))
+    )
+  ),
+  hr(),
+  
+  fluidRow(
+    column(3,
+      sliderInput(inputId = 'ON',
+                    label = 'Orthorexic Tendency',
+                    min = 1,
+                    max = 5,
+                    step = .1,
+                    value = c(1,5))),
+    column(3,
+      sliderInput(inputId = 'SAC',
+                    label = 'Social Appearance Comparison',
+                    min = 1,
+                    max = 5,
+                    step = .1,
+                    value = c(1,5))),
+    column(3,
+      sliderInput(inputId = 'TII',
+                    label = 'Thin-ideal Internalization',
+                    min = 1,
+                    max = 5,
+                    step = .1,
+                    value = c(1,5))),
+    column(3,
+      sliderInput(inputId = 'BD',
+                    label = 'Body Dissatisfaction',
+                    min = 1,
+                    max = 5,
+                    step = .1,
+                    value = c(1,5)))
+    ),
+  
+  fluidRow(
+    column(3,
+      sliderInput(inputId = 'current_mood',
+                    label = 'Current Mood',
+                    min = 1,
+                    max = 5,
+                    step = .1,
+                    value = c(1,5))),
+    column(3,
+      sliderInput(inputId = 'selfesteem',
+                    label = 'Self-Esteem',
+                    min = 1,
+                    max = 5,
+                    step = .1,
+                    value = c(1,5))),
+    column(3,
+      sliderInput(inputId = 'exce_exercise',
+                    label = 'Excessive Exercise',
+                    min = 1,
+                    max = 5,
+                    step = .1,
+                    value = c(1,5))),
+    column(3,
+      sliderInput(inputId = 'mother',
+                    label = 'Maternal Influence',
+                    min = 1,
+                    max = 5,
+                    step = .1,
+                    value = c(1,5)))
+    ),
+  
+  fluidRow(
+    column(4,
+      sliderInput(inputId = 'vlogexperience',
+                    label = 'Prior WIEIAD Experience',
+                    min = 0,
+                    max = 15,
+                    step = 1,
+                    value = c(0,15))),
+    column(4,
+      sliderInput(inputId = 'recent_help',
+                    label = 'Recent ED Treatment',
+                    min = 0,
+                    max = 6,
+                    step = 1,
+                    value = c(0,6))),
+    column(4,
+      sliderInput(inputId = 'Age',
+                    label = 'Age',
+                    min = 19,
+                    max = 25,
+                    step = 1,
+                    value = c(19,25)))
+    ),
+  
+  hr(),
+  
+  fluidRow(
+    column(12, DTOutput("table"))
+  )
+)
+
+server_data <- function(input, output) {
+  filtered_data_info <- reactive({
+    data_info %>%
+      filter(group %in% input$vlog_type,
+             help_received %in% input$help_received,
+             race_ethnicity %in% input$race_ethnicity,
+             
+             current_mood >= input$current_mood[1] & current_mood <= input$current_mood[2],
+             ON >= input$ON[1] & ON <= input$ON[2],
+             SAC >= input$SAC[1] & SAC <= input$SAC[2],
+             TII >= input$TII[1] & TII <= input$TII[2],
+             BD >= input$BD[1] & BD <= input$BD[2],
+             selfesteem >= input$selfesteem[1] & selfesteem <= input$selfesteem[2],
+             exce_exercise >= input$exce_exercise[1] & exce_exercise <= input$exce_exercise[2],
+             mother >= input$mother[1] & mother <= input$mother[2],
+             vlogexperience >= input$vlogexperience[1] & vlogexperience <= input$vlogexperience[2],
+             recent_help >= input$recent_help[1] & recent_help <= input$recent_help[2],
+             Age >= input$Age[1] & Age <= input$Age[2]
+      )
+  })
+  
+  output$table <- renderDT({
+    datatable(filtered_data_info(),
+              options = list(pageLength = 10))
+  })
+}
+
+shinyApp(ui = ui_data,
+         server = server_data,
+         options = list(height = "750px"))
+
+```
+  
 ## Orthorexic Tendency
 
 Orthoresic tendency is something something and it is related to something something
@@ -104,6 +270,18 @@ the word cloud shows that something something
 In conclusion, I found that 
 
 ## Reference
+
+Del Pozo, G., Ezan, P., Moubassat, M., & Déchelotte, P. (2024). Does so-called “healthy” content on Instagram display balanced recipes? A pilot study in relation with the risk of unhealthy eating patterns in social network users. Appetite, 107542. https://doi.org/10.1016/j.appet.2024.107542
+
+Drivas, M., Reed, O. S., & Berndt-Goke, M. (2024). #WhatIEatInADay: The effects of viewing food diary TikTok videos on young adults’ body image and intent to diet. Body Image, 49, 101712. https://doi.org/10.1016/j.bodyim.2024.101712
+
+Koven, N. S., & Abry, A. W. (2015). The clinical basis of orthorexia nervosa: Emerging perspectives. Neuropsychiatric Disease and Treatment, 11, 385–394. https://doi.org/10.2147/NDT.S61665
+
+Kummer, A., Dias, F. M., & Teixeira, A. L. (2008). On the concept of orthorexia nervosa. Scandinavian Journal of Medicine & Science in Sports, 18(3), 395–396. https://doi.org/10.1111/j.1600-0838.2008.00809.x
+
+Messer, M., Liu, C., & Linardon, J. (2023). Orthorexia nervosa symptoms prospectively predict symptoms of eating disorders and depression. Eating Behaviors, 49, 101734. https://doi.org/10.1016/j.eatbeh.2023.101734
+
+Minadeo, M., & Pope, L. (2022). Weight-normative messaging predominates on TikTok—A qualitative content analysis. PLOS ONE, 17(11), e0267997. https://doi.org/10.1371/journal.pone.0267997
 
 
 
