@@ -1,0 +1,110 @@
+---
+title: "#WhatIEatinaDay Social Media Content and Orthorexic Tendency"
+author: >
+  Songyi Ahn
+  <br><small style="color:black;">School of Journalism and Communication, University of Oregon</small>
+date: "2026-03-??"
+output: 
+  html_document:
+      theme: paper
+      toc_float: true
+      toc_collapsed: false
+      toc: true
+      toc_depth: 3
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(rio)
+library(here)
+library(tidyverse)
+```
+
+## Background
+
+what i eat in a day, orthorexia background 
+
+### Project Objectives
+
+1. examine 
+2. identify 
+
+### About Data 
+
+the data is based on something something 
+
+## Orthorexic Tendency
+
+Orthoresic tendency is something something and it is related to something something
+
+### WIEIAD Message Types
+
+messages types are 1.2.3.4.
+
+plots
+
+### Thin-ideal Internalization
+
+thin-ideal internalization is how much you want
+
+plots
+
+### Social Appearance Comparison
+
+social appearance comparison is tendency to compare yourself with others
+
+plots
+
+### Body Dissatisfaction
+
+body dissatisfaction is the extent of 
+
+plots
+
+### Self-Esteem
+
+self-esteem is how much you respect yourself and love yourself
+
+plots
+
+### Excessive Exercise 
+
+excessive exercise is fixated exercising 
+
+plots
+
+## Predicting Orthorexic Tendency
+
+I performed this this that that 
+
+### Model Specification
+
+linear regression with lasso and ridge 
+
+### Prediction
+
+slider style: thin-ideal internalization, social appearance comparison, body dissatisfaction, self-esteem, excessive exercise / click style: wieiad message type, eating disorder treatment experience
+
+## Common Themes in Weight-Inclusive Responses
+
+The data includes open-ended response from people who watched weight-inclusve videos and was instructed to write their personal opinion about nonrestictive and weight-inclsuve eating habits for your overall health and well-being.
+
+### Word Cloud 
+
+the word cloud shows that something something 
+
+## Conlcusion
+
+In conclusion, I found that 
+
+## Reference
+
+
+
+
