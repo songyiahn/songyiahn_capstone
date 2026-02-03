@@ -1,11 +1,12 @@
 ---
-title: "#WhatIEatinaDay Social Media Content and Orthorexic Tendency"
+title: "Are #WhatIEatInaDay Vlogs Making You Obsessed with Eating *Healthy*?"
 author: >
   Songyi Ahn
   <br><small style="color:black;">School of Journalism and Communication, University of Oregon</small>
 output: 
   html_document:
-      theme: paper
+      theme: united
+      self_contained: false
       toc_float: true
       toc_collapsed: false
       toc: true
@@ -27,24 +28,99 @@ library(shiny)
 library(DT)
 ```
 
-## Background
+## #WIEIAD & Obsessed with "Healthy"?
 
-Short-form social media content such as "What I Eat in a Day" (WIEIAD) videos, often portraying restrictive and aesthetic eating habits for self-improvement, has become a dominant format among young audiences (Drivas et al., 2024; Pfender et al., 2023). However, the psychological impacts of these videos remain under-explored. Prior research suggests that exposure to appearance-focused media can heighten diverse body image concerns (e.g., thin-ideal internalization, social comparison, body dissatisfaction, self-esteem) and even contribute to problematic exercising and eating behaviors (Del Pozo et al., 2024; Minadeo & Pope, 2022). Among these, while other disordered eating such as anorexia and bulimia have received great amount of attention, a less-recognized but increasingly prevalant condition is orthorexia, which is characterized by an extreme obsessive focus on "healthy" eating (Koven & Abry, 2015; Kummer et al., 2008). Orthorexic tendencies often are hidden under health and 'ideal' weight management, but could result in serious mental and physical health outcomes (Messer et al., 2023). This project aims to raise public awareness of these subtle yet critical impacts of diet-focused social media content. Despite these effects, information explaining the mechanisms linking social media content to body image concerns is often inaccessible and hard to interpret for the general public. By providing an intuitive, visual, and interactive interface, complex associations between WIEIAD social media content exposure and body image status can be communicated more effectively to non-experts. These target audience of general public may benefit most from understanding how recent social media trend shapes their perceptions of body, food, and health. 
+Have you ever watched "What I Eat in a Day" (WIEIAD) videos on Instagram or TikTok and thought, *"I should eat like that, too"*?
 
-### Project Objectives
+```{=html}
+<style>
+.embed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: start;
+}
 
-1. Examine how different types of WIEIAD/vlog messages influence orthorexic tendencies among young women.
-2. Explore the relationship between body image-related factors and orthorexic tendencies among young women.
-3. Identify the psychological, behavioral, and social predictors strongly associated with orthorexic tendencies. 
-4. Analyze the themes of open-ended reflections from viewers of non-restrictive weight-inclusive WIEIAD content.
+.embed-box {
+  max-width: 420px;
+  margin: auto;
+}
 
-### About Data 
+.embed-box blockquote {
+  margin: 0 !important;
+  width: 100% !important;
+}
+</style>
+```
 
-This dataset was collected from an online experiment involving 472 young women (ages 19-25, M = 23.1, SD = 1.7). Participants came from diverse racial and ethnic backgrounds and most reported prior exposure to WIEIAD social media content. A small proportion indicated previous eating disorder treatment experience. 
+```{=html}
+<div class="embed-grid">
 
-Participants randomly watched one of four vlogs: 1) non-food related vlogs, 2) weight-normative diet WIEIAD videos, 3) weight-inclusive non-diet WIEIAD videos, or 4) weight-inclusive non-diet WIEIAD videos with prompts to consider positive impact of conventionally regarded as 'unhealthy' food in their own words. Then orthorexic tendencies and body-image-lated factors were measured.
+  <div class="embed-box">
+    <iframe 
+      src="https://www.tiktok.com/embed/7597822502827543828"
+      width="325"
+      height="575"
+      frameborder="0"
+      allowfullscreen
+      scrolling="no">
+    </iframe>
+  </div>
 
-Table below shows the data used for this project.
+  <div class="embed-box">
+    <blockquote class="instagram-media"
+      data-instgrm-permalink="https://www.instagram.com/reel/DQ1ThmHiLdu/">
+    </blockquote>
+  </div>
+
+</div>
+
+<script async src="//www.instagram.com/embed.js"></script>
+```
+
+These short clips often show perfectly portioned meals, colorful ingredients, and a disciplined approach to eating that looks inspiring and healthy. For many viewers, these videos feel motivating: a glimpse into a lifestyle centered on self-care and "clean" eating.
+
+But what if these videos are quietly shaping how we think about food in ways we don't realize?
+
+Studies have long shown that [appearance-focused media can influence how we feel about our bodies](https://doi.org/10.1016/j.bodyim.2024.101841). It can lead to comparison, dissatisfaction, and pressure to live up to unrealistic ideals. A similar process may be happening with food.
+
+While eating "healthy" is generally encouraged (though what counts as "healthy" and who gets to define it is not always clear), an extreme preoccupation with healthy eating can quietly take a different turn. People may begin comparing what they eat to what others eat, feeling dissatisfied with their own meals, and developing a distorted idea of what an "ideal" diet should look like.
+
+```{=html}
+<div style="text-align: center;">
+  <img src="images/top-view-delicious-sandwiches-with-sliced-tomatoes-healthy-life-writing-grey-surface-snack-bun-burger-sandwich-bread.jpg" width="450">
+</div>
+```
+
+This pattern of thinking is known as ***orthorexia***. It often hides behind good intentions but [can lead to anxiety, guilt around food, and rigid eating patterns that negatively affect both mental and physical well-being](https://pmc.ncbi.nlm.nih.gov/articles/PMC10490497/).
+
+This project aims to make these hidden connections easier to understand through interactive visualization that show how different types of message around food embedded in daily #WhatIEatInaDay social media content may shape perceptions of body image, health, and food.
+
+### By Exploring This Project...
+
+```{=html}
+<div style="text-align: center;">
+  <img src="images/3943536.jpg" width="300">
+</div>
+```
+
+1.  You'll see how different types of WIEIAD/vlog messages can make viewers focus too much on eating "healthy"
+2.  You'll learn how comparing yourself to others and feeling dissatisfied with your body can connect to an obsession with "healthy" eating
+3.  You'll discover which psychological, behavioral, and social predictors make some people more prone to othorexic tendencies than others.
+4.  You'll get glimpse into how viewers respond to non-restrictive weight-inclusive content, and how positive approaches to eating influence thoughts and feelings about food.
+
+### About Data
+
+This project used data from an online experiment with 471 young women (ages 19-25). They watched one of four types of vlogs:
+
+1)  non-food related vlogs
+2)  weight-normative diet WIEIAD vlogs
+3)  weight-inclusive non-diet WIEIAD vlogs
+4)  weight-inclusive non-diet WIEIAD vlogs with prompts encouraging viewers to reflect on the positive effects of "unhealthy" food
+
+After watching, participants responded their thoughts on food, body image, and tendencies toward extreme healthy eating.
+
+Table below gives a quick look at the data used for this project. Feel free to take a look around the data!
 
 ```{r echo=FALSE}
 data <- import(here("data/wieiad_cleaned.csv"))
@@ -53,6 +129,35 @@ data <- import(here("data/wieiad_cleaned.csv"))
 ```{r}
 data_info <- data %>%
   select(current_mood, group, ON, SAC, TII, BD, selfesteem, exce_exercise, mother, vlogexperience, help_received, recent_help, race_ethnicity, Age)
+
+data_info <- data_info %>%
+  mutate(help_received = if_else(is.na(help_received), 0, help_received)) %>%
+  mutate(help_received = recode(help_received,
+                                "1" = "yes",
+                                "0" = "no"))
+
+data_info <- data_info %>%
+  mutate(recent_help = if_else(is.na(recent_help), 0, recent_help))
+
+data_info <- data_info %>%
+  mutate(group = recode(group,
+                        "Group1_C" = "non-food vlog",
+                        "Group2_N" = "diet WIEIAD vlog",
+                        "Group3_I" = "non-diet WIEIAD vlog",
+                        "Group4_ID" = "non-diet WIEIAD vlog with prompts"))
+
+```
+
+```{r}
+race_choices <- c(
+  "Asian",
+  "American Indian or Alaska Native",
+  "Black or African American",
+  "Caucasian or White",
+  "Hispanic or Latino",
+  "Native Hawaiian or Pacific Islander",
+  "Other"
+)
 
 #ui for data 
 
@@ -73,8 +178,8 @@ ui_data <- fluidPage(
     column(4,
       checkboxGroupInput(inputId = 'race_ethnicity',
                          label = 'Race/Ethnicity:',
-                         choices = unique(data_info$race_ethnicity),
-                         selected = unique(data_info$race_ethnicity))
+                         choices = race_choices,
+                         selected = race_choices
     )
   ),
   hr(),
@@ -151,7 +256,7 @@ ui_data <- fluidPage(
                     value = c(0,15))),
     column(4,
       sliderInput(inputId = 'recent_help',
-                    label = 'Recent ED Treatment',
+                    label = 'ED Treatment Recency',
                     min = 0,
                     max = 6,
                     step = 1,
@@ -170,15 +275,15 @@ ui_data <- fluidPage(
   fluidRow(
     column(12, DTOutput("table"))
   )
-)
+))
 
 server_data <- function(input, output) {
   filtered_data_info <- reactive({
     data_info %>%
+      rowwise() %>%
       filter(group %in% input$vlog_type,
              help_received %in% input$help_received,
-             race_ethnicity %in% input$race_ethnicity,
-             
+             any(str_detect(race_ethnicity, input$race_ethnicity)),
              current_mood >= input$current_mood[1] & current_mood <= input$current_mood[2],
              ON >= input$ON[1] & ON <= input$ON[2],
              SAC >= input$SAC[1] & SAC <= input$SAC[2],
@@ -204,7 +309,7 @@ shinyApp(ui = ui_data,
          options = list(height = "750px"))
 
 ```
-  
+
 ## Orthorexic Tendency
 
 Orthoresic tendency is something something and it is related to something something
@@ -229,7 +334,7 @@ plots
 
 ### Body Dissatisfaction
 
-body dissatisfaction is the extent of 
+body dissatisfaction is the extent of
 
 plots
 
@@ -239,19 +344,19 @@ self-esteem is how much you respect yourself and love yourself
 
 plots
 
-### Excessive Exercise 
+### Excessive Exercise
 
-excessive exercise is fixated exercising 
+excessive exercise is fixated exercising
 
 plots
 
 ## Predicting Orthorexic Tendency
 
-I performed this this that that 
+I performed this this that that
 
 ### Model Specification
 
-linear regression with lasso and ridge 
+linear regression with lasso and ridge
 
 ### Prediction
 
@@ -261,28 +366,16 @@ slider style: thin-ideal internalization, social appearance comparison, body dis
 
 The data includes open-ended response from people who watched weight-inclusve videos and was instructed to write their personal opinion about nonrestictive and weight-inclsuve eating habits for your overall health and well-being.
 
-### Word Cloud 
+### Word Cloud
 
-the word cloud shows that something something 
+the word cloud shows that something something
 
 ## Conlcusion
 
-In conclusion, I found that 
+In conclusion, I found that
 
 ## Reference
 
-Del Pozo, G., Ezan, P., Moubassat, M., & Déchelotte, P. (2024). Does so-called “healthy” content on Instagram display balanced recipes? A pilot study in relation with the risk of unhealthy eating patterns in social network users. Appetite, 107542. https://doi.org/10.1016/j.appet.2024.107542
+Bonfanti, R. C., Melchiori, F., Teti, A., Albano, G., Raffard, S., Rodgers, R., & Lo Coco, G. (2025). The association between social comparison in social media, body image concerns and eating disorder symptoms: A systematic review and meta-analysis. Body image, 52, 101841. <https://doi.org/10.1016/j.bodyim.2024.101841>
 
-Drivas, M., Reed, O. S., & Berndt-Goke, M. (2024). #WhatIEatInADay: The effects of viewing food diary TikTok videos on young adults’ body image and intent to diet. Body Image, 49, 101712. https://doi.org/10.1016/j.bodyim.2024.101712
-
-Koven, N. S., & Abry, A. W. (2015). The clinical basis of orthorexia nervosa: Emerging perspectives. Neuropsychiatric Disease and Treatment, 11, 385–394. https://doi.org/10.2147/NDT.S61665
-
-Kummer, A., Dias, F. M., & Teixeira, A. L. (2008). On the concept of orthorexia nervosa. Scandinavian Journal of Medicine & Science in Sports, 18(3), 395–396. https://doi.org/10.1111/j.1600-0838.2008.00809.x
-
-Messer, M., Liu, C., & Linardon, J. (2023). Orthorexia nervosa symptoms prospectively predict symptoms of eating disorders and depression. Eating Behaviors, 49, 101734. https://doi.org/10.1016/j.eatbeh.2023.101734
-
-Minadeo, M., & Pope, L. (2022). Weight-normative messaging predominates on TikTok—A qualitative content analysis. PLOS ONE, 17(11), e0267997. https://doi.org/10.1371/journal.pone.0267997
-
-
-
-
+Horovitz, O., & Argyrides, M. (2023). Orthorexia and Orthorexia Nervosa: A Comprehensive Examination of Prevalence, Risk Factors, Diagnosis, and Treatment. Nutrients, 15(17), 3851. <https://doi.org/10.3390/nu15173851>
