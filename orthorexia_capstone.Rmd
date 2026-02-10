@@ -93,7 +93,7 @@ While eating "healthy" is generally encouraged (though what counts as "healthy" 
 </div>
 ```
 
-This pattern of thinking is known as ***orthorexia***. It often hides behind good intentions but [can lead to anxiety, guilt around food, and rigid eating patterns that negatively affect both mental and physical well-being](https://pmc.ncbi.nlm.nih.gov/articles/PMC10490497/).
+This pattern of thinking is known as ***orthorexia***:unhealthy obsession with "healthy" eating. It often hides behind good intentions but [can lead to anxiety, guilt around food, and rigid eating patterns that negatively affect both mental and physical well-being](https://pmc.ncbi.nlm.nih.gov/articles/PMC10490497/).
 
 This project aims to make these hidden connections easier to understand through interactive visualization that show how different types of message around food embedded in daily #WhatIEatInaDay social media content may shape perceptions of body image, health, and food.
 
@@ -482,7 +482,7 @@ The data includes open-ended response from people who watched weight-inclusve vi
 
 ### Word Cloud
 
-the word cloud shows that something something
+the word cloud shows that something something / + positive negative analysis
 
 ## Conlcusion
 
