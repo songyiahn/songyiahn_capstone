@@ -138,6 +138,14 @@ ui <- navbarPage(
            
            p("After watching, participants responded their thoughts on food, body image, and tendencies toward extreme healthy eating."),
            
+           tags$div(
+             style = "text-align: center;",
+             tags$img(
+               src = "images/brainfood.jpeg",
+               width = "450px"
+             )
+           ),
+           
            p("Table below gives a quick look at the data used for this project. Feel free to take a look around the data!"),
            
            fluidRow(
@@ -323,10 +331,24 @@ ui <- navbarPage(
 # ------------------ TAB 4 PREDICTION ------------------
     tabPanel("Orthorexia Prediction",
            h2("Predicting Orthorexic Tendency"),
-           p("I performed this and that"),
+           p("Now it's time for you to explore! You can pick the variables you're interested in and see how the orthorexia score might change."),
            
-           h3("Model Specificatino"),
-           p("linear regression with lasso and ridge"),
+           p(HTML("Just to give you a quick idea of the prediction model I used: I compared seveal regression-based models, including <b>Ridge, Lasso,
+                  and ElasticNet</b>. Among them, <b>ElasticNet performed the best</b>, so I chose it as the final model (RSquared = 0.54, MAE = 0.29, RMSE = 0.38). 
+                  This model looks at all the variables at once while giving more weight to the most important ones, helping improve prediction accuracy.")),
+           
+           tags$div(
+             style = "text-align: center;",
+             tags$img(
+               src = "images/runningfood.jpeg",
+               width = "450px"
+             )
+           ),
+           
+           p(HTML("By examining with the variables, you can get a sense of <b>which factors tend to have a negative effect on orthorexcia score</b> and
+             <b>how you might protect yourself from them</b>.")),
+           
+           p("Play around with the elements below and see how the orthorexia score changes in real time!"),
            
            h3("Prediction"),
            p("slider style: thin-ideal internalization, social appearance comparison, body dissatisfaction, self-esteem, exercise
