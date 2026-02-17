@@ -3,15 +3,20 @@ library(here)
 library(readr)
 library(tidyverse)
 library(shiny)
+library(recipes)
 library(bslib)
 library(DT)
 library(viridis)
 library(glmnet)
+library(caret)
+library(glmnet)
+library(vip)
+library(gridExtra)
+library(tidymodels)
+library(tibble)
 
 #data 
-data <- import(here("data/wieiad_cleaned.csv"))
-
-data_info <- data %>%
+data_info <- import(here("data/wieiad_cleaned.csv")) %>%
   select(current_mood, group, ON, SAC, TII, BD, selfesteem, exce_exercise, mother, vlogexperience, help_received, recent_help, race_ethnicity, Age)
 
 data_info <- data_info %>%
@@ -459,7 +464,9 @@ ui <- navbarPage(
                  "https://doi.org/10.3390/nu15173851",
                  target = "_blank"
                )
-             )
+             ),
+             
+             tags$a(id = "returnUrl", href = "#")
              
     )
 )
