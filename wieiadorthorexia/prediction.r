@@ -10,6 +10,8 @@ library(gridExtra)
 library(tidymodels)
 
 #import data
+data <- import(here("data", "wieiad_cleaned.csv"))
+
 pdata_info <- data %>%
   select(id, current_mood, group, ON, SAC, TII, BD, selfesteem, exce_exercise, mother, vlogexperience, help_received, recent_help, race_ethnicity, Age)
 

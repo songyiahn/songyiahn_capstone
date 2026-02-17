@@ -1,10 +1,12 @@
 library(rio)
 library(here)
+library(readr)
 library(tidyverse)
 library(shiny)
 library(bslib)
 library(DT)
 library(viridis)
+library(glmnet)
 
 #data 
 data <- import(here("data/wieiad_cleaned.csv"))
@@ -40,7 +42,6 @@ race_choices <- c(
   "Native Hawaiian or Pacific Islander",
   "Other"
 )
-
 
 # Define UI for application 
 ui <- navbarPage(
@@ -334,7 +335,7 @@ ui <- navbarPage(
            p("Now it's time for you to explore! You can pick the variables you're interested in and see how the orthorexia score might change."),
            
            p(HTML("Just to give you a quick idea of the prediction model I used: I compared seveal regression-based models, including <b>Ridge, Lasso,
-                  and ElasticNet</b>. Among them, <b>ElasticNet performed the best</b>, so I chose it as the final model (RSquared = 0.54, MAE = 0.29, RMSE = 0.38). 
+                  and ElasticNet</b>. Among them, <b>ElasticNet performed the best</b>, so I chose it as the final model (RSquared = 0.56, MAE = 0.28, RMSE = 0.38). 
                   This model looks at all the variables at once while giving more weight to the most important ones, helping improve prediction accuracy.")),
            
            tags$div(
@@ -350,10 +351,70 @@ ui <- navbarPage(
            
            p("Play around with the elements below and see how the orthorexia score changes in real time!"),
            
+           p("*Race/Ethnicity is not included in this prediction tool because there weren't enough individuals in each race/ethnicity group to produce reliable results.
+             To avoid misleading predictions, the model focuses on psychological, behavioral, and media-related factors."),
+           
            h3("Prediction"),
-           p("slider style: thin-ideal internalization, social appearance comparison, body dissatisfaction, self-esteem, exercise
-             click style: wieiad message type, eating disorder treatment experience")
-         ),
+           fluidRow(
+             column(3,
+                    selectInput("group", "Vlog Type",
+                                choices = unique(data_info$group),
+                                selected = unique(data_info$group)[1])
+             ),
+             column(3,
+                    selectInput("help_received", "Help Received",
+                                choices = c("Yes" = "yes", "No" = "no"),
+                                selected = "no",
+                                multiple = FALSE)
+                    )
+             ),
+           
+           fluidRow(
+             column(2,
+                    sliderInput("SAC", "Social Appearance Comparison", 1, 5, 3, step = 0.1)
+             ),
+             column(2,
+                    sliderInput("TII", "Thin-ideal Internalization", 1, 5, 3, step = 0.1)
+             ),
+             column(2,
+                    sliderInput("BD", "Body Dissatisfaction", 1, 5, 3, step = 0.1)
+             ),
+             column(2,
+                    sliderInput("selfesteem", "Self-Esteem", 1, 5, 3, step = 0.1)
+             ),
+             column(2,
+                    sliderInput("exce_exercise", "Excessive Exercise", 1, 5, 3, step = 0.1)
+             ),
+             column(2,
+                  sliderInput("current_mood", "Current Mood", 1, 5, 3, step = 0.1)
+             ),
+             column(2,
+                    sliderInput("mother", "Maternal Influence", 1, 5, 3, step = 0.1)
+             ),
+             column(2,
+                    sliderInput("vlogexperience", "Prior WIEIAD Experience", 0, 15, 5, step = 1)
+             ),
+             column(2,
+                    sliderInput("recent_help", "ED Treatment Recency", 1, 6, 3.5, step = 0.1)
+             ),
+             column(2,
+                    sliderInput("Age", "Age", 19, 25, 22, step = 1)
+             )
+           ),
+           fluidRow(
+             column(2,
+                    actionButton("predict", "Predict Orthorexia Score", width = "200%")
+             )
+           ),
+           
+           fluidRow(
+             column(12,
+                    h4("Predicted Orthorexic Tendency for the above condition is..."),
+                    textOutput("on_prediction"),
+                    style = "font-size: 24px; font-weight: bold"
+             )
+           )
+    ),
 
 # ------------------ TAB 5 WEIGHT INCLUSIVE ------------------
     tabPanel("Weight-Inclusive Responses",
@@ -402,6 +463,12 @@ ui <- navbarPage(
 )
 
 
+# load the prediction model
+elastic_model_prediction <- readRDS("models/elastic_model.rds")
+recipe_prep_prediction <- readRDS("models/recipe_prep.rds")
+
+recipe_prep_prediction <- recipe_prep_prediction %>%
+  update_role_requirements(role = "ID", bake = FALSE)
           
 # Define server logic 
 server <- function(input, output) {
@@ -542,6 +609,50 @@ server <- function(input, output) {
         plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
         axis.title = element_text(size = 14)
       )
+  })
+  
+# ---- Prediction ----
+  
+  observeEvent(input$predict, {
+    
+    new_data <- tibble(
+      id = 0,
+      group = factor(input$group, levels = c("non-food vlog", "diet WIEIAD vlog", "non-diet WIEIAID vlog", "non-diet WIEIAD vlog with prompts")),
+      SAC = as.numeric(input$SAC),
+      TII = as.numeric(input$TII),
+      BD = as.numeric(input$BD),
+      exce_exercise = as.numeric(input$exce_exercise),
+      mother = as.numeric(input$mother),
+      current_mood = as.numeric(input$current_mood),
+      vlogexperience = as.numeric(input$vlogexperience),
+      Age = as.numeric(input$Age),
+      selfesteem = as.numeric(input$selfesteem),
+      help_received = as.numeric(ifelse(length(input$help_received) == 1 && input$help_received == "yes", 1, 0)),
+      recent_help = as.numeric(input$recent_help)
+    )
+    
+    model_features <- rownames(coef(elastic_model_prediction$finalModel, elastic_model_prediction$bestTune$lambda))
+    model_features <- setdiff(model_features, c("(Intercept)")) 
+    
+    new_data_processed <- bake(recipe_prep_prediction, new_data)
+    
+    new_data_matrix <- do.call(cbind, lapply(new_data_processed, unname))
+    colnames(new_data_matrix) <- colnames(new_data_processed)
+    for(f in model_features){
+      if(!f %in% colnames(new_data_matrix)){
+        new_data_matrix <- cbind(new_data_matrix, setNames(matrix(0, nrow = nrow(new_data_matrix), ncol = 1), f))
+      }
+    }
+    
+    new_data_matrix <- new_data_matrix[, model_features, drop = FALSE]
+    
+    pred <- predict(elastic_model_prediction$finalModel, newx = new_data_matrix, s = elastic_model_prediction$bestTune$lambda)
+    pred_val <- as.numeric(pred)
+    
+    output$on_prediction <- renderText({
+      paste0("", round(pred_val, 2))
+    })
+    
   })
   
 }
