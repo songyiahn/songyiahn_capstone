@@ -92,7 +92,7 @@ ui <- navbarPage(
              tags$div(
                style = "text-align: center;",
                tags$img(
-                 src = "images/top-view-delicious-sandwiches-with-sliced-tomatoes-healthy-life-writing-grey-surface-snack-bun-burger-sandwich-bread.jpg",
+                 src = "images/toast.jpg",
                  width = "450px"
                )
              ),
@@ -334,9 +334,11 @@ ui <- navbarPage(
            h2("Predicting Orthorexic Tendency"),
            p("Now it's time for you to explore! You can pick the variables you're interested in and see how the orthorexia score might change."),
            
-           p(HTML("Just to give you a quick idea of the prediction model I used: I compared seveal regression-based models, including <b>Ridge, Lasso,
+           p(HTML("Just to give you a quick idea of how the prediction works: I compared seveal regression-based models, including <b>Ridge, Lasso,
                   and ElasticNet</b>. Among them, <b>ElasticNet performed the best</b>, so I chose it as the final model (RSquared = 0.56, MAE = 0.28, RMSE = 0.38). 
-                  This model looks at all the variables at once while giving more weight to the most important ones, helping improve prediction accuracy.")),
+                  ElasticNet combines the strengths of Ridge and Lasso methods. In simple terms, it examines all factors together 
+                  while giving more weight to the most important ones and minimizing the influence of less relevant variables.
+                  This helps produce more stable and acurate predictions.")),
            
            tags$div(
              style = "text-align: center;",
