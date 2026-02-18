@@ -628,18 +628,18 @@ server <- function(input, output) {
     
     new_data <- tibble(
       id = 0,
-      group = factor(input$group, levels = c("non-food vlog", "diet WIEIAD vlog", "non-diet WIEIAID vlog", "non-diet WIEIAD vlog with prompts")),
-      SAC = as.numeric(input$SAC),
-      TII = as.numeric(input$TII),
-      BD = as.numeric(input$BD),
-      exce_exercise = as.numeric(input$exce_exercise),
-      mother = as.numeric(input$mother),
-      current_mood = as.numeric(input$current_mood),
-      vlogexperience = as.numeric(input$vlogexperience),
-      Age = as.numeric(input$Age),
-      selfesteem = as.numeric(input$selfesteem),
-      help_received = as.numeric(ifelse(length(input$help_received) == 1 && input$help_received == "yes", 1, 0)),
-      recent_help = as.numeric(input$recent_help)
+      group = factor(input$pred_group, levels = c("non-food vlog", "diet WIEIAD vlog", "non-diet WIEIAID vlog", "non-diet WIEIAD vlog with prompts")),
+      SAC = as.numeric(input$pred_SAC),
+      TII = as.numeric(input$pred_TII),
+      BD = as.numeric(input$pred_BD),
+      exce_exercise = as.numeric(input$pred_exce_exercise),
+      mother = as.numeric(input$pred_mother),
+      current_mood = as.numeric(input$pred_current_mood),
+      vlogexperience = as.numeric(input$pred_vlogexperience),
+      Age = as.numeric(input$pred_Age),
+      selfesteem = as.numeric(input$pred_selfesteem),
+      help_received = as.numeric(ifelse(length(input$pred_help_received) == 1 && input$pred_help_received == "yes", 1, 0)),
+      recent_help = as.numeric(input$pred_recent_help)
     )
     
     model_features <- rownames(coef(elastic_model_prediction$finalModel, elastic_model_prediction$bestTune$lambda))
