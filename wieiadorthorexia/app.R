@@ -2,6 +2,7 @@ library(rio)
 library(here)
 library(readr)
 library(tidyverse)
+library(stringr)
 library(shiny)
 library(recipes)
 library(bslib)
@@ -9,14 +10,15 @@ library(DT)
 library(viridis)
 library(glmnet)
 library(caret)
-library(glmnet)
 library(vip)
 library(gridExtra)
 library(tidymodels)
 library(tibble)
 
 #data 
-data_info <- import(here("data/wieiad_cleaned.csv")) %>%
+data <- import(here("data/wieiad_cleaned.csv"))
+
+data_info <- data %>%
   select(current_mood, group, ON, SAC, TII, BD, selfesteem, exce_exercise, mother, vlogexperience, help_received, recent_help, race_ethnicity, Age)
 
 data_info <- data_info %>%
@@ -364,12 +366,12 @@ ui <- navbarPage(
            h3("Prediction"),
            fluidRow(
              column(3,
-                    selectInput("group", "Vlog Type",
+                    selectInput("pred_group", "Vlog Type",
                                 choices = unique(data_info$group),
                                 selected = unique(data_info$group)[1])
              ),
              column(3,
-                    selectInput("help_received", "Help Received",
+                    selectInput("pred_help_received", "Help Received",
                                 choices = c("Yes" = "yes", "No" = "no"),
                                 selected = "no",
                                 multiple = FALSE)
@@ -378,34 +380,34 @@ ui <- navbarPage(
            
            fluidRow(
              column(2,
-                    sliderInput("SAC", "Social Appearance Comparison", 1, 5, 3, step = 0.1)
+                    sliderInput("pred_SAC", "Social Appearance Comparison", 1, 5, 3, step = 0.1)
              ),
              column(2,
-                    sliderInput("TII", "Thin-ideal Internalization", 1, 5, 3, step = 0.1)
+                    sliderInput("pred_TII", "Thin-ideal Internalization", 1, 5, 3, step = 0.1)
              ),
              column(2,
-                    sliderInput("BD", "Body Dissatisfaction", 1, 5, 3, step = 0.1)
+                    sliderInput("pred_BD", "Body Dissatisfaction", 1, 5, 3, step = 0.1)
              ),
              column(2,
-                    sliderInput("selfesteem", "Self-Esteem", 1, 5, 3, step = 0.1)
+                    sliderInput("pred_selfesteem", "Self-Esteem", 1, 5, 3, step = 0.1)
              ),
              column(2,
-                    sliderInput("exce_exercise", "Excessive Exercise", 1, 5, 3, step = 0.1)
+                    sliderInput("pred_exce_exercise", "Excessive Exercise", 1, 5, 3, step = 0.1)
              ),
              column(2,
-                  sliderInput("current_mood", "Current Mood", 1, 5, 3, step = 0.1)
+                  sliderInput("pred_current_mood", "Current Mood", 1, 5, 3, step = 0.1)
              ),
              column(2,
-                    sliderInput("mother", "Maternal Influence", 1, 5, 3, step = 0.1)
+                    sliderInput("pred_mother", "Maternal Influence", 1, 5, 3, step = 0.1)
              ),
              column(2,
-                    sliderInput("vlogexperience", "Prior WIEIAD Experience", 0, 15, 5, step = 1)
+                    sliderInput("pred_vlogexperience", "Prior WIEIAD Experience", 0, 15, 5, step = 1)
              ),
              column(2,
-                    sliderInput("recent_help", "ED Treatment Recency", 1, 6, 3.5, step = 0.1)
+                    sliderInput("pred_recent_help", "ED Treatment Recency", 1, 6, 3.5, step = 0.1)
              ),
              column(2,
-                    sliderInput("Age", "Age", 19, 25, 22, step = 1)
+                    sliderInput("pred_Age", "Age", 19, 25, 22, step = 1)
              )
            ),
            fluidRow(
@@ -484,12 +486,12 @@ server <- function(input, output) {
   
   filtered_data_info <- reactive({
     data_info %>%
-      rowwise() %>%
+      rowwise %>%
       filter(group %in% input$vlog_type,
              help_received %in% input$help_received,
-             any(str_detect(race_ethnicity, input$race_ethnicity)),
-             current_mood >= input$current_mood[1] & current_mood <= input$current_mood[2],
+             any(str_detect(race_ethnicity, paste(input$race_ethnicity, collapse = "|"))),
              ON >= input$ON[1] & ON <= input$ON[2],
+             current_mood >= input$current_mood[1] & current_mood <= input$current_mood[2],
              SAC >= input$SAC[1] & SAC <= input$SAC[2],
              TII >= input$TII[1] & TII <= input$TII[2],
              BD >= input$BD[1] & BD <= input$BD[2],
@@ -500,7 +502,7 @@ server <- function(input, output) {
              recent_help >= input$recent_help[1] & recent_help <= input$recent_help[2],
              Age >= input$Age[1] & Age <= input$Age[2]
       )
-  })
+   })
   
   output$table <- renderDT({
     datatable(filtered_data_info(),
