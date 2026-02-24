@@ -428,14 +428,70 @@ ui <- navbarPage(
 # ------------------ TAB 5 WEIGHT INCLUSIVE ------------------
     tabPanel("Weight-Inclusive Responses",
            h2("Common Themes in Responses"),
-           p("The data includes open-ended response from people who watched weight-inclusve videos and was instructed to write their personal opinion 
-             about nonrestictive and weight-inclsuve eating habits for your overall health and well-being."),
+           p("The data includes open-ended response from some people who watched weight-inclusve videos. They were asked to share their personal opinions 
+             about non-restictive and weight-inclsuve eating habits for your overall health and well-being."),
+           p(HTML("So, what words do people use most often in these responses? How do they feel about enjoying foods traditionally considered 
+                  <i>unhealthy</i> like ice cream, red meat, or white rice as part of a non-restrictive, weight-inclusive approach?")),
+           p("Let's take a closer look at the most frequently mentioned words and explore the emotions people associate with these eating habits."),
            
-           h3("Word Cloud"),
-           p("Word cloud shows this and that"),
+           h3("Frequently Used Words"),
            
-           h3("sentiment analysis"),
-           p("sentiment shows positive or negative opinions")
+           tags$div(
+             style = "text-align: center;",
+             tags$img(
+               src = "images/wordcloud.jpg",
+               width = "450px"
+             )
+           ),
+           
+           p(HTML("The word cloud shows that words like <i>food, unhealthy, happy, eat, feel, comfort, positive, contribute, sweet, mood, enjoy</i>,
+                  and <i>satisfy</i> are used most often. Bigger words appeared more frequently in the reponses, while smaller words were
+                  mentioned less.")),
+           
+           p(HTML("Now, let's see which words were mentioned <b>10 times or more</b> across all respondants!")),
+           
+           tags$div(
+             style = "text-align: center;",
+             tags$img(
+               src = "images/topwords_plot.png",
+               width = "700px"
+             )
+           ),
+           
+           h3("Emotions Reflected in Responses"),
+           p(HTML("This section looks at the feelings revealed in the responses. Out of 120 responses, most people <b>(109 respondants)</b> 
+           shared positive responses, while only <b>11 responses</b> were negative. On average, the overall sentiment score was <b>0.356</b>. 
+           Since positive values indicate positive sentiment, zero indicates neutral, and negative values indicate negative responses,
+           we can know again that the reponses were generally positive.")),
+           
+           p("Now, let's check out which main emotion categories these responses belong to."),
+           
+           tags$div(
+             style = "text-align: center;",
+             tags$img(
+               src = "images/dominantemotion_plot.png",
+               width = "700px"
+             )
+           ),
+           
+           p(HTML("A lot of responses showed <b>joy</b> when talking about non-restrictive and weight-inclusive eating habits,
+                  and these behaviors also seemd to be seen as <b>trustworthy</b>. Respondants also expressed some <b>anticipation</b> toward
+                  these habits. At the same time, emotions like <b>sadness, disgust</b>, and <b>fear</b> were present.
+                  Perhaps given that our society is still influenced by diet culture and strict weigtht management, 
+                  these new ways of eating can feel a little intimidating. Yet, seeing <b>surprise</b> in the reponses suggests that 
+                  we don't need to worry too much about these new eating habits. They might bring some unexpected positive experiences, too!")),
+           
+           p(HTML(
+             '<p style="font-size:0.8em";">
+             [NOTE]<br>
+             *For emotion and sentiment analysis, R packages such as <b>tidytext, sentimentr, and textdata</b> was used.
+                  To examine the emotion categories in responses, the
+                  <a href = "https://onlinelibrary-wiley-com.uoregon.idm.oclc.org/doi/10.1111/j.1467-8640.2012.00460.x" target = "_blank">
+                    <b>NRC Emotion Lexicon</b> developed by Mohammad and Turney (2013)
+                  </a> was applied.<br>
+             *The total frequency of each emotion category exceed the number of participants (120) because emotions were analyzed at the sentence level.
+                </i> </p>'))
+           
          ),
 
 # ------------------ TAB 6 CONCLUSION ------------------
@@ -464,6 +520,16 @@ ui <- navbarPage(
                tags$a(
                  href = "https://doi.org/10.3390/nu15173851",
                  "https://doi.org/10.3390/nu15173851",
+                 target = "_blank"
+               )
+             ),
+             
+             p(
+               "Mohammad, S. M., & Turney, P. D. (2013). 
+    Crowdsourcing a Word–Emotion Association Lexicon. Computational Intelligence, 29(3), 436–465. ",
+               tags$a(
+                 href = "https://doi.org/10.1111/j.1467-8640.2012.00460.x",
+                 "https://doi.org/10.1111/j.1467-8640.2012.00460.x",
                  target = "_blank"
                )
              ),
