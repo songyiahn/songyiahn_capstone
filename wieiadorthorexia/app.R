@@ -57,7 +57,7 @@ ui <- navbarPage(
     bootswatch = "united"),
   
   # ------------------ TAB 1 INTRO ------------------
-  tabPanel("Introduction",
+  tabPanel("Before We Start",
              tags$style(HTML("
 .embed-grid {display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
 .embed-box{max-width:420px;margin:auto;}
@@ -289,7 +289,7 @@ ui <- navbarPage(
              Let's take a closer look at how each factor relates to orthorexic tendencies among young women."),   
              
            h3("Which Vlog Types are Linked to Higher Orthorexic Tendency?"),
-           plotOutput("plot_group"),
+           plotOutput("plot_group", height = 500),
            p(HTML("
            Looking at the average orthorexic tendency across different vlog types, we can see some interesting patterns. 
            Compared to people who watched non-food vlogs, those who watched diet-focused WIEIAD vlogs, 
@@ -303,37 +303,40 @@ ui <- navbarPage(
                   This suggests that a more flexible, holistic approach to food might help reduce extreme preoccupation with healthy eating.")),
            
            h3("How Thin-Ideal Internalization Relates to Orthorexic Tendency Across Vlog Types?"),
-           plotOutput("plot_tii"),
-           p("This graph shows how orthorexic tendency changes as people more strongly internalize the thin body ideal — 
-           that is, when they not only recognize society’s preference for thinness but begin to adopt it as a personal value."),
-           p("Overall, regardless of which type of vlog was watched, orthorexic tendency tended to increase as thin-ideal internalization became stronger.
-             At the same time, the extent of orthorexic tendency still differed across vlog groups,
-             suggesting that media exposure may shape how strongly this internalized ideal translates into eating-related attitudes and behaviors."),
+           plotOutput("plot_tii", height = 500),
+           p(HTML("This graph shows how orthorexic tendency changes as people more strongly internalize the thin body ideal — 
+           that is, when they not only recognize society’s preference for thinness but begin to adopt it as a personal value.")),
+           p(HTML("Overall, regardless of which type of vlog was watched, <b>orthorexic tendency</b> tended to <b>increase</b> as 
+           <b>thin-ideal internalization</b> became <b>stronger</b>.
+             At the same time, the extent of orthorexic tendency still <b>differed across vlog groups</b>,
+             suggesting that media exposure may shape how strongly this internalized ideal translates into eating-related attitudes and behaviors.")),
            
            h3("How Social Appearance Comparison Relates to Orthorexic Tendency Across Vlog Types?"),
-           plotOutput("plot_sac"),
-           p("This graph shows how orthorexic tendency varies depending on how often and strongly individuals compare their appearance to others. 
-             Similar to thin-ideal internalization, orthorexic tendency tended to increase as social appearance comparison became stronger 
-             across all vlog types. Still, the actual orthorexic scores differed across vlog groups."),
+           plotOutput("plot_sac", height = 500),
+           p(HTML("This graph shows how orthorexic tendency varies depending on how often and strongly individuals compare their appearance to others. 
+             Similar to thin-ideal internalization, <b>orthorexic tendency</b> tended to <b>increase</b> 
+             as <b>social appearance comparison</b> became <b>stronger</b> 
+             across all vlog types. Still, the actual orthorexic scores <b>differed across vlog groups</b>.")),
            
            h3("How Body Dissatisfaction Relates to Orthorexic Tendency Across Vlog Types?"),
-           plotOutput("plot_bd"),
-           p("This time, the graph shows orthorexic tendency based on how dissatisfied individuals are with their own body. 
-             Again, although general orthorexic scores were different according to vlogs types, 
-             orthorexic tendency tended to increase as individuals were not happy with their body shapes regardless which vlog they watched."),
-           
-           h3("How Self-Esteem Relates to Orthorexic Tendency Across Vlog Types?"),
-           plotOutput("plot_se"),
-           p("This graph shows how orthorexic tendency varies according to overall self-esteem, not just appearance. 
-             Individuals who treats themselves more kindly tended to be less preoccupied with “healthy” eating. 
-             Of course, the absolute orthorexia scores still differed depending on which type of vlog they watched."),
+           plotOutput("plot_bd", height = 500),
+           p(HTML("This time, the graph shows orthorexic tendency based on how dissatisfied individuals are with their own body. 
+             Again, although general orthorexic scores were <b>different according to vlogs types</b>, 
+             <b>orthorexic tendency</b> tended to <b>increase</b> as individuals were <b>not happy with their body shapes</b> 
+                  regardless which vlog they watched.")),
            
            h3("How Excessive Exercise Relates to Orthorexic Tendency Across Vlog Types?"),
-           plotOutput("plot_ex"),
-           p("Lastly, this graph shows that individuals who engage in excessive exercise tend to have higher orthorexic tendencies. 
+           plotOutput("plot_ex", height = 500),
+           p(HTML("This graph shows that individuals who engage in <b>excessive exercise</b> tend to have <b>higher orthorexic tendencies</b>. 
              In other words, those who exercise obsessively beyond what’s considered a proper amount may also be more preoccupied with eating “healthily.”
              Since diet and exercise are often seen as key components of health, this connection makes sense. 
-             As before, the type of vlog watched still influences the absolute orthorexia scores.")
+             As before, the <b>type of vlog watched still influences</b> the absolute orthorexia scores.")),
+           
+           h3("How Self-Esteem Relates to Orthorexic Tendency Across Vlog Types?"),
+           plotOutput("plot_se", height = 500),
+           p(HTML("The last graph shows how orthorexic tendency varies according to overall self-esteem, not just appearance. 
+             Individuals who <b>treats themselves more kindly</b> tended to be <b>less</b> preoccupied with “healthy” eating. 
+             Of course, the absolute orthorexia scores still </b>differed depending on which type of vlog</b> they watched."))
          ),
 
 # ------------------ TAB 4 PREDICTION ------------------
@@ -360,9 +363,13 @@ ui <- navbarPage(
            
            p("Play around with the elements below and see how the orthorexia score changes in real time!"),
            
-           p("*Race/Ethnicity is not included in this prediction tool because there weren't enough individuals in each race/ethnicity group to produce reliable results.
-             To avoid misleading predictions, the model focuses on psychological, behavioral, and media-related factors."),
-           
+           p(HTML(
+             '<p style="font-size:0.8em";">
+           <i>*Race/Ethnicity is not included in this prediction tool because there were not enough individuals in each race/ethnicity group to produce reliable results.
+             To avoid misleading predictions, the model focuses on psychological, behavioral, and media-related factors.</i>
+           </p>'
+           )),
+             
            h3("Prediction"),
            fluidRow(
              column(3,
@@ -410,6 +417,20 @@ ui <- navbarPage(
                     sliderInput("pred_Age", "Age", 19, 25, 22, step = 1)
              )
            ),
+           
+           p(HTML(
+             '<p style="font-size:0.8em";">
+           [NOTE]<br>
+           <b>Factors associated with higher orthorexic tendency</b><br>
+           watching diet-focused WIEIAD vlogs, greater social appearance comparison, stronger thin-ideal internalization, higher body dissatisfaction, 
+           excessive exercise behaviors, strong maternal influence on weight/food attitudes, prior exposure to WIEIAD content, 
+           recent eating disorder treatment history, younger age<br>
+           <br>
+           <b>Factors associated with lower orthorexic tendency</b><br>
+           watching non-diet weight-inclusive WIEIAD vlogs, having received help or support, higher self-esteem, more positive current mood
+           </p>'
+           )),
+           
            fluidRow(
              column(2,
                     actionButton("predict", "Predict Orthorexia Score", width = "200%")
@@ -422,7 +443,17 @@ ui <- navbarPage(
                     textOutput("on_prediction"),
                     style = "font-size: 24px; font-weight: bold"
              )
-           )
+           ),
+           
+           p(HTML(
+             '<p style="font-size:0.8em";">
+           [NOTE]<br>
+           *<b>1.0-2.0</b>: Low orthorexic tendency. Eating attitudes appear flexible and balanced.<br>
+           *<b>2.1-3.0</b>: Mild, below-average orthorexic tendency. Some attention to healthy eating is present.<br>
+           *<b>3.1-4.0</b>: Moderate concerning orthorexic tendency. Increasing rigidity or concern about food may be emerging.<br>
+           *<b>4.1-5.0</b>: High orthorexic tendency. Strong preoccupation with food quality may affect daily life.
+           </p>'
+           ))
     ),
 
 # ------------------ TAB 5 WEIGHT INCLUSIVE ------------------
@@ -458,11 +489,39 @@ ui <- navbarPage(
              )
            ),
            
+           p(HTML("Words appeared on this graph show some patterns in how people think about non-restrictive and inclusive eating.")),
+           
+           p(HTML("Words like <i>feel, happy, positive, comfort, satisfy, enjoy, mood</i>, and <i>bring</i> were used frequently.
+                  This tells us that food is not described merely as fuel or nutrition. Instead, participants framed eating as 
+                  an emotionally meaningful experience linked to comfort, mood regulation, and positive affect.
+                  In other words, food plays an important emotional role. It helps people feel better, manage their mood, and experience enjoyment.
+                  Eating is <b>not just physically nutritional</b>, but it is also <b>psychological and emotional</b>.")),
+           
+           p(HTML("At the same time, words such as <i>unhealthy, diet, restrict, balance</i>, and <i>moderation</i> also appeared often.
+           This suggests that food choices are evaluated within a moral and health-based framework. People are not just describing what they eat. 
+           They are judging it. The contrast between restriction and moderation reflects a tension between control and balance. 
+           Even when talking about enjoyment, participants often emphasized limits and self-regulation. 
+           These responses reflect there are still <b>some internalized health norms</b>, highlighting <b>moral evaluations of “unhealthy” foods</b> and 
+           the importance of <b>managing one’s intake</b>.")),
+           
+           p(HTML("Words like <i>crave, sweet, treat, dessert</i>, and <i>taste</i> reveal another layer.
+           Sweet foods are often framed as rewards or special experiences rather than ordinary parts of daily eating. 
+           The word crave is especially revealing desire and a potential loss of control. This pattern suggests that 
+           food is often experienced within a <b>pleasure–control tension</b>. People navigate a <b>constant negotiation between desire and discipline</b>.")),
+           
+           p(HTML("Interestingly, verbs like <i>contribute, provide, make</i>, and <i>bring</i> were also used often.
+           This indicates that participants view food as actively contributing to their physical health, mental state, and overall quality of life. 
+           Food was described as <b>contributing to both physical and mental well-being</b>.")),
+           
+           p(HTML("Finally, the frequent use of words such as <i>mental, mood</i>, and <i>feel</i> directly connects eating behavior to 
+           <b>psychological well-being</b>. Rather than focusing solely on calories or weight, many responses reflect an emotional and mental health framing of food.
+           This aligns with a broader <b>holistic wellness</b> discourse, where food is seen as influencing both body and mind.")),
+           
            h3("Emotions Reflected in Responses"),
-           p(HTML("This section looks at the feelings revealed in the responses. Out of 120 responses, most people <b>(109 respondants)</b> 
-           shared positive responses, while only <b>11 responses</b> were negative. On average, the overall sentiment score was <b>0.356</b>. 
-           Since positive values indicate positive sentiment, zero indicates neutral, and negative values indicate negative responses,
-           we can know again that the reponses were generally positive.")),
+           p(HTML("This section looks at the feelings revealed in the responses. Out of 120 responses, <b>most people (109 respondants)</b> 
+           shared <b>positive</b> responses, while only <b>11 responses</b> were <b>negative</b>. On average, the <b>overall sentiment</b> score 
+           was <b>0.356</b>. Since positive values indicate positive sentiment, zero indicates neutral, and negative values indicate negative responses,
+           we can know again that the reponses were <b>generally positive</b>.")),
            
            p("Now, let's check out which main emotion categories these responses belong to."),
            
@@ -495,9 +554,71 @@ ui <- navbarPage(
          ),
 
 # ------------------ TAB 6 CONCLUSION ------------------
-    tabPanel("Conclusion",
-           h2("Conclusion"),
-           p("In conclusion, this project suggests that")
+    tabPanel("Before We Leave",
+           h2("Takeaways: What We Can Learn About Media, Eating, and Well-Being"),
+           
+           tags$div(
+             style = "text-align: center;",
+             tags$img(
+               src = "images/mediaeating.jpeg",
+               width = "450px"
+             )
+           ),
+           
+           h4("Media Exposure Matters More Than We Think"),
+           p(HTML("The type of wellness content we consume can shape how we think about food and health. 
+           Content that emphasizes dieting, restriction, or weight-normative ideals may encourage rigidity and rule-based eating. 
+           In contrast, non-diet and weight-inclusive content that celebrates diverse foods and flexible approaches to health 
+           can support more balanced attitudes.<br> 
+           <br>
+           <b>Not all wellness content has the same impact</b>. As we watch, create, and share health-related media, 
+           being mindful of these differences can help us foster healthier relationships with food.")),
+           
+           h4("Body Image Plays A Powerful Role"),
+           p(HTML("Orthorexic tendencies are closely linked to appearance comparison, thin-ideal beliefs, body dissatisfaction, and excessive exercise. 
+           This suggests that eating attitudes are not shaped by food alone, but by beliefs about how food will affect our bodies.<br>
+           <br>
+           <b>Developing a healthier understanding of body diversity and respecting ourselves (self-esteem)</b> may help reduce the urge 
+           to evaluate health solely through eating behavior. When we shift focus from controlling food to caring for our bodies, 
+           more balanced habits can emerge.")),
+           
+           tags$div(
+             style = "text-align: center;",
+             tags$img(
+               src = "images/foods.jpeg",
+               width = "800px"
+             )
+           ),
+           
+           h4("Health Norms Shape How We Judge Food"),
+           p(HTML("Findings of this project suggest that social norms about “healthy eating” strongly influence how people evaluate food choices. 
+           Many individuals navigate a tension between enjoying food and meeting internalized expectations about what they should eat.<br>
+           <br>
+           Yet what counts as <b>“healthy” can vary widely across cultures, contexts, and individual needs</b>. 
+           This highlights the importance of <b>education</b> and <b>open conversations about health</b>, 
+           helping people build <b>flexible and informed perspectives</b> rather than rigid rules.")),
+           
+           h4("Food Is Emotional, Not Just Nutritional"),
+           p(HTML("Eating is deeply connected to comfort, mood regulation, and emotional well-being. 
+           Food nourishes not only the body, but also the mind and spirit. As we think about <b>healthy eating</b>, 
+           it may be helpful <b>to include foods and experiences that bring comfort, connection, and joy</b>, not just those that meet nutritional goals.")),
+           
+           tags$div(
+             style = "text-align: center;",
+             tags$img(
+               src = "images/sharecare.jpeg",
+               width = "450px"
+             )
+           ),
+           
+           h4("Eating Attitudes Exist On A Spectrum"),
+           p(HTML("Throughout this blog, we discussed orthorexic tendencies as a pattern of concern around healthy eating. 
+           While problematic eating patterns deserve attention and care, it is important not to view them only through a lens of pathology.<br>
+           <br>
+           Instead, these findings highlight <b>a continuum shaped by media exposure, psychological factors, and social context</b>. 
+           Understanding where we and those around us fall on this spectrum can promote <b>awareness, compassion,</b> and <b>supportive care</b>.<br>
+           <br>
+           By staying mindful and supporting one another, we can foster healthier relationships with food for ourselves and our communities."))
           ),
 
 # ------------------ TAB 7 REFERENCES ------------------
@@ -603,6 +724,7 @@ server <- function(input, output) {
       geom_jitter(width = 0.1, height = 0.1, size = 3, alpha = 0.5) +
       geom_smooth(method = "loess", se = FALSE, size = 1.3) +
       scale_color_viridis_d(option = "viridis") +
+      coord_fixed(ratio = 1, xlim = c(1,5), ylim = c(1,5)) +
       theme_minimal() +
       labs(
         title = "Orthorexic Tendency by\nThin-Ideal Internalization and Vlog Type",
@@ -621,6 +743,7 @@ server <- function(input, output) {
       geom_jitter(width = 0.1, height = 0.1, size = 3, alpha = 0.5) +
       geom_smooth(method = "loess", se = FALSE, size = 1.3) +
       scale_color_viridis_d(option = "viridis") +
+      coord_fixed(ratio = 1, xlim = c(1,5), ylim = c(1,5)) +
       theme_minimal() +
       labs(
         title = "Orthorexic Tendency by\nSocial Comparison and Vlog Type",
@@ -639,6 +762,7 @@ server <- function(input, output) {
       geom_jitter(width = 0.1, height = 0.1, size = 3, alpha = 0.5) +
       geom_smooth(method = "loess", se = FALSE, size = 1.3) +
       scale_color_viridis_d(option = "viridis") +
+      coord_fixed(ratio = 1, xlim = c(1,5), ylim = c(1,5)) +
       theme_minimal() +
       labs(
         title = "Orthorexic Tendency by\nBody Dissatisfaction and Vlog Type",
@@ -657,6 +781,7 @@ server <- function(input, output) {
       geom_jitter(width = 0.1, height = 0.1, size = 3, alpha = 0.5) +
       geom_smooth(method = "loess", se = FALSE, size = 1.3) +
       scale_color_viridis_d(option = "viridis") +
+      coord_fixed(ratio = 1, xlim = c(1,5), ylim = c(1,5)) +
       theme_minimal() +
       labs(
         title = "Orthorexic Tendency by\nSelf-Esteem and Vlog Type",
@@ -675,6 +800,7 @@ server <- function(input, output) {
       geom_jitter(width = 0.1, height = 0.1, size = 3, alpha = 0.5) +
       geom_smooth(method = "loess", se = FALSE, size = 1.3) +
       scale_color_viridis_d(option = "viridis") +
+      coord_fixed(ratio = 1, xlim = c(1,5), ylim = c(1,5)) +
       theme_minimal() +
       labs(
         title = "Orthorexic Tendency by\nExcessive Exercise and Vlog Type",
