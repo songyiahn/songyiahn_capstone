@@ -289,7 +289,9 @@ ui <- navbarPage(
              Let's take a closer look at how each factor relates to orthorexic tendencies among young women."),   
              
            h3("Which Vlog Types are Linked to Higher Orthorexic Tendency?"),
-           plotOutput("plot_group", height = 500),
+           div(
+             style = "display:flex; justify-content:center;",
+             plotOutput("plot_group", height = 500, width = 500)),
            p(HTML("
            Looking at the average orthorexic tendency across different vlog types, we can see some interesting patterns. 
            Compared to people who watched non-food vlogs, those who watched diet-focused WIEIAD vlogs, 
@@ -657,8 +659,73 @@ ui <- navbarPage(
              
              tags$a(id = "returnUrl", href = "#")
              
-    )
-)
+    ),
+
+# ------------------ TAB 8 ABOUT ME ------------------
+tabPanel("About Me",
+         
+         tags$div(
+           style = "text-align: center;",
+           tags$img(
+             src = "images/songyiprofile.jpg",
+             width = "300px"
+           )
+         ),
+         
+         br(),
+         
+         div(style = "text-align:center;",
+         h3("Songyi Ahn-Borello"),
+         br(),
+         h5("School of Journalism and Communication"),
+         h5("University of Oregon"),
+         h5("PhD Candidate in Communication and Media Studies"),
+         br(),
+         p("Hi, I am a PhD candidate in Communication and Media Studies at the University of Oregon. My reserach interests include the 
+           intersection of emerging media technology and its impact on health and diet culture, 
+           particularly in the context of body image, eating behaviors, and well-being. I am a data-driven strategic communicator who uses quantitative and
+           computatinoal approahces to deliver evidence-based insights to my audiences. If you have any questions for me, please feel free to reach out! 😊")),
+         
+         div(style="text-align:center; margin-top:20px;",
+             
+             tags$a(
+               href="https://www.linkedin.com/in/songyiborello/",
+               target="_blank",
+               class="btn btn-info",
+               "LinkedIn"
+             ),
+             
+             tags$a(
+               href="https://github.com/songyiahn",
+               target="_blank",
+               class="btn btn-light",
+               "GitHub"
+             ),
+             
+             tags$a(
+               href="mailto:sahn5@uoregon.edu",
+               class="btn btn-secondary",
+               "Email"
+             ),
+             
+             br(),
+             br(),
+             
+             tags$a(
+               href = "CV_SONGYI BORELLO (AHN).pdf",
+               download = "CV_SONGYI BORELLO (AHN).pdf",
+               class = "btn btn-success",
+               "Academic CV"
+             ),
+             
+             tags$a(
+               href = "SONGYI BORELLO_RESUME.pdf",
+               download = "SONGYI BORELLO_RESUME.pdf",
+               class = "btn btn-warning",
+               "Industry Resume"
+             )
+         )
+         ))
 
 
 # load the prediction model
