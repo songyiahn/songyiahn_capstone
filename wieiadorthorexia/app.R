@@ -413,7 +413,7 @@ ui <- navbarPage(
                     sliderInput("pred_vlogexperience", "Prior WIEIAD Experience", 0, 15, 5, step = 1)
              ),
              column(2,
-                    sliderInput("pred_recent_help", "ED Treatment Recency", 1, 6, 3.5, step = 0.1)
+                    sliderInput("pred_recent_help", "ED Treatment Recency", 0, 6, 3.5, step = 0.1)
              ),
              column(2,
                     sliderInput("pred_Age", "Age", 19, 25, 22, step = 1)
@@ -887,7 +887,7 @@ server <- function(input, output) {
     
     new_data <- tibble(
       id = 0,
-      group = factor(input$pred_group, levels = c("non-food vlog", "diet WIEIAD vlog", "non-diet WIEIAID vlog", "non-diet WIEIAD vlog with prompts")),
+      group = factor(input$pred_group, levels = c("non-food vlog", "diet WIEIAD vlog", "non-diet WIEIAD vlog", "non-diet WIEIAD vlog with prompts")),
       SAC = as.numeric(input$pred_SAC),
       TII = as.numeric(input$pred_TII),
       BD = as.numeric(input$pred_BD),
