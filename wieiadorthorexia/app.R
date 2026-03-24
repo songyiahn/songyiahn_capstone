@@ -681,10 +681,10 @@ tabPanel("About Me",
          h5("University of Oregon"),
          h5("PhD Candidate in Communication and Media Studies"),
          br(),
-         p("Hi, I am a PhD candidate in Communication and Media Studies at the University of Oregon. My reserach interests include the 
+         p("Hi, I am a PhD candidate in Communication and Media Studies at the University of Oregon. My research interests include the 
            intersection of emerging media technology and its impact on health and diet culture, 
            particularly in the context of body image, eating behaviors, and well-being. I am a data-driven strategic communicator who uses quantitative and
-           computatinoal approahces to deliver evidence-based insights to my audiences. If you have any questions for me, please feel free to reach out! 😊")),
+           computational approaches to deliver evidence-based insights to my audiences. If you have any questions for me, please feel free to reach out! 😊")),
          
          div(style="text-align:center; margin-top:20px;",
              
